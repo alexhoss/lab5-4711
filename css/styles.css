@@ -1,0 +1,33 @@
+body {
+    font-family: 'Work Sans', sans-serif !important;
+}
+
+.artistTitle{
+    font-weight: bold
+
+}
+
+.list-group-item:hover {
+    background-color: gainsboro;
+}
+
+.container {
+    margin: 0 auto;
+    
+}
+
+.artistImg {
+    padding-right: 12px;
+    max-width:100px;
+}
+
+.artistSearch {
+    border: 1px solid grey;
+    padding:15px;
+}
+
+#addArtistForm{
+    
+    display: block;
+}
+

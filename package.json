@@ -1,0 +1,23 @@
+{
+  "name": "lab05",
+  "version": "1.0.0",
+  "description": "",
+  "main": "myjs.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexhoss/4711-lab0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexhoss/4711-lab0/issues"
+  },
+  "homepage": "https://github.com/alexhoss/4711-lab0#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.4"
+  }
+}

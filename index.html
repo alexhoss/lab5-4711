@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+
+<head>
+    <script>
+    </script>
+
+
+</head>
+
+<script type="text/javascript" src="js/myjs.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<link href="https://fonts.googleapis.com/css?family=Alike+Angular|Asul|Concert+One|Eczar|Fruktur|Kavoon|Neuton|Space+Mono|Tillana|Work+Sans&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<script>
+    window.onload = loadStorage();
+
+    function loadStorage() {
+        $.getJSON("artists", function(data) {
+            var artistList = document.getElementById("artistList");
+
+            var artistListStore = data.artists;
+
+
+            for (var i in artistListStore) {
+                var nameValue = artistListStore[i].name;
+                var aboutValue = artistListStore[i].about;
+                var imgValue = artistListStore[i].img;
+
+                var node = document.createElement("LI");
+                var img = document.createElement('img');
+                img.setAttribute("src", imgValue)
+                img.setAttribute("class", "float-left artistImg")
+
+                var name = document.createElement('p')
+                name.setAttribute("class", "artistTitle")
+                name.append(nameValue)
+
+                var about = document.createElement('span');
+                about.setAttribute("class", "");
+                about.append(aboutValue);
+
+                var delButton = document.createElement("button")
+                delButton.setAttribute("class", "btn btn-danger float-right")
+                delButton.append("Delete")
+
+                delButton.addEventListener("click", function() {
+                    var li = this.parentNode;
+                    var nameToDel = li.childNodes[1].innerHTML;
+                    deleteStorage(nameToDel);
+
+                });
+
+                node.setAttribute("class", "list-group-item")
+
+                node.appendChild(img);
+                node.appendChild(name);
+                node.appendChild(about);
+                node.appendChild(delButton)
+                artistList.appendChild(node);
+
+                document.getElementById("addArtistForm").reset()
+
+
+            }
+        });
+
+    }
+
+    function deleteStorage(nameToDel) {
+        var object = {
+            name: nameToDel
+        }
+
+        $.post("/del", object);
+        location.reload();
+
+    }
+</script>
+
+<body>
+    <div class="container col-md-7  artistSearch">
+        <h4> Artist Directory</h4>
+
+        <div class="row">
+            <div class="col-8"><input class="form-control" id="searchText" type="text"></div>
+            <div class="col-2"><button class="button" id="addArtist" onclick="popUpForm()"> Add Artist</button></div>
+            <div class="col-2"><button class="button" id="search" onclick="search()"> Search</button></div>
+        </div>
+        <br>
+
+
+        <div class="container col-md-8">
+
+            <form id="addArtistForm" method="post" action="/addArtist">
+                <input name="name" id="artistName" class="form-control" type="text" placeholder="Name" maxlength="40">
+                <input name="about" id="artistAbout" class="form-control" type="text" placeholder="About" maxlength="40">
+                <input name="img" id="imgUrl" class="form-control" type="text" placeholder="Image Url">
+                <input type="submit" value="Add Artist">
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+    <div class="container col-md-6">
+        <ul class="list-group" id="artistList">
+
+
+
+        </ul>
+
+
+    </div>
+
+
+</body>
+
+
+</body>
+
+</html>
