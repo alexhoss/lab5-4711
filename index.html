@@ -19,10 +19,9 @@
 
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <script>
-    window.onload = loadStorage();
+    $(document).ready(function() {
 
-    function loadStorage() {
-        $.getJSON("artists.json", function(data) {
+        $.post("artists", function(data) {
             var artistList = document.getElementById("artistList");
 
             var artistListStore = data.artists;
@@ -69,9 +68,11 @@
 
 
             }
-        });
+        })
+    })
 
-    }
+
+
 
     function deleteStorage(nameToDel) {
         var object = {
