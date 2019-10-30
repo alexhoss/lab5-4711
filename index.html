@@ -21,7 +21,7 @@
 <script>
     $(document).ready(function() {
 
-        $.post("artists", function(data) {
+        $.getJSON("artists", function(data) {
             var artistList = document.getElementById("artistList");
 
             var artistListStore = data.artists;
