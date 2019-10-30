@@ -22,7 +22,7 @@
     window.onload = loadStorage();
 
     function loadStorage() {
-        $.getJSON("artists", function(data) {
+        $.getJSON("artists.json", function(data) {
             var artistList = document.getElementById("artistList");
 
             var artistListStore = data.artists;
